@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form page</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Page a</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Page b</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Page c</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+      <h1 class="display-4">Hello</h1>
+      <p class="lead">Thông tin/mục đích của page</p>
+      <hr class="my-4" />
+  
+    <!-- Form nhập thông tin -->
+    <div class="container">
+      <h2>Form Nhập Thông Tin</h2>
+      <form id="formx">
+        <div class="form-group">
+          <label for="anetlot">A.netLot:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="anetlot"
+            placeholder="Nhập thông số A.netLot"
+          />
+        </div>
+        <div class="form-group">
+          <label for="assortlot">Assort.Lot</label>
+          <input
+            type="number"
+            class="form-control"
+            id="assortlot"
+            placeholder="Nhập thông số Assort.Lot"
+          />
+        </div>
+        <div class="form-group">
+          <label for="gmt">Gmt</label>
+          <input
+            type="text"
+            class="form-control"
+            id="gmt"
+            placeholder="Nhập Gmt"
+          />
+        </div>
+        <div class="form-group">
+          <label for="oprn">Operation code</label>
+          <input
+            type="number"
+            class="form-control"
+            id="oprn"
+            placeholder="Nhập Operation code"
+          />
+        </div>
+        <div class="form-group">
+          <label for="sam">SAM</label>
+          <input
+            type="text" pattern="^-?[0-9]\d*(\.\d+)?$"
+            class="form-control"
+            id="sam"
+            placeholder="Nhập thời gian"
+          />
+        </div>
+        <button id="btnA" class="btn btn-primary">Cập nhật</button>
+      </form>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+    <script>
+        $(document).ready(function(){
+            $("#btnA").click(function(e){
+                e.preventDefault();
+                var anetlot=$("#anetlot").val()
+                var assortlot=$("#assortlot").val()
+                var gmt=$("#gmt").val()
+                var oprn=$("#oprn").val()
+                var sam=$("#sam").val()
+                console.log(anetlot)
+                console.log(assortlot)
+                console.log(gmt)
+                console.log(oprn)
+                console.log(sam)
+                var data_load = {'anetlot': anetlot,
+                    'assortlot':assortlot,
+                    'gmt':gmt,
+                    'oprn':oprn,
+                    'sam':sam
+                };
+                $.post("/update_sah_by_operation/", data_load, function(data, status){
+                    if(status === 'success'){
+                        console.log(data)
+                        alert(data.notes)
+                        // Create the table header
+                    }
+                });
+            });
+        });
+    </script>
+    
+
+
+
+
+</html>
